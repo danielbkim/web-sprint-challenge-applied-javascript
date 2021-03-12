@@ -1,3 +1,5 @@
+import axios from "axios"
+
 const Card = (article) => {
   // TASK 5
   // ---------------------
@@ -16,7 +18,42 @@ const Card = (article) => {
   //     <span>By { authorName }</span>
   //   </div>
   // </div>
-  //
+
+
+
+  let card = document.createElement('div');
+  let hline = document.createElement('div');
+  let auth = document.createElement('div');
+  let imgContainer = document.createElement('div');
+  let authPhoto = document.createElement('img');
+  let authName = document.createElement('span');
+
+  card.classList.add('card');
+  hline.classList.add('headline');
+  auth.classList.add('author');
+  imgContainer.classList.add('img-container');
+  
+  
+
+  card.appendChild(hline);
+  card.appendChild(auth);
+  auth.appendChild(imgContainer);
+  imgContainer.appendChild(authPhoto);
+  auth.appendChild(authName);
+  console.log(card);
+
+  // imgContainer.appendChild(authPhoto);
+  // auth.appendChild(authName);
+
+  hline.textContent = article.headline;
+  authPhoto.setAttribute('src', article.authorPhoto);
+  authName.textContent = article.authorName;
+
+  // card.addEventListener('click', function(){
+  //   console.log(article.headline);
+  // });
+  console.log(card);
+  return card;
 }
 
 const cardAppender = (selector) => {
@@ -28,6 +65,44 @@ const cardAppender = (selector) => {
   // Create a card from each and every article object in the response, using the Card component.
   // Append each card to the element in the DOM that matches the selector passed to the function.
   //
+
+  axios
+    .get(`https://lambda-times-api.herokuapp.com/articles`)
+    .then((res) => {
+      // console.log(res);
+      const articles = res.data.articles;
+      const cardsContainer = document.querySelector('.cards-container');
+      // console.log(cardsContainer);
+
+      for(let key in articles){
+        const card = articles[key];
+        // console.log(articles[key]);
+
+        card.forEach(function(singleArticle){
+          console.log(singleArticle);
+          const singleCard = Card(singleArticle);
+          cardsContainer.appendChild(singleCard);
+        });
+      }
+      // console.log(articles);
+
+
+
+      // Card(articles['javascript']);
+      // cardsContainer.appendChild(articles);
+      // for(let key in articles){
+      //   const card = Card(key);
+      //   console.log(card);
+      // }
+
+      // console.log(articles.javascript);
+
+      
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+
 }
 
 export { Card, cardAppender }
