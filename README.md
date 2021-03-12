@@ -87,4 +87,4 @@ Be prepared to demonstrate your understanding of this week's concepts by answeri
 > Because Nodelists aren't actual arrays and because that is so, methods in the array prototype will not be recognized as part of a Nodelist.  In order to manipulate the Nodelist like you would an array, you would need to convert it first.
 
 5. What is a component?
-> A component is a block of reusable code that you can use throughout your program so that you're able to minimize resources to rewrite again, as representative of elements on a page.  A component for navigation bars, for instance.
+> A component is a block of reusable code that you can use throughout your program so that you're able to minimize resources to rewrite again, as representative of elements on a page.  A component for a navigation bar, for instance.
